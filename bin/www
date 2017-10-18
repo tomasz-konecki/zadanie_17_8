@@ -4,26 +4,16 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('nodejs-regular-webapp2:server');
-var http = require('http');
+const app = require('../app'),
+    debug = require('debug')('nodejs-regular-webapp2:server'),
+    http = require('http'),
+    ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn(),
+    port = normalizePort(process.env.PORT || '3000'),
+    server = http.createServer(app);
 
-/**
- * Get port from environment and store in Express.
- */
-
-var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
-var server = http.createServer(app);
-
-/**
- * Listen on provided port, on all network interfaces.
- */
+app.use('/profile', ensureLoggedIn, require('../profile/profile')());
 
 server.listen(port);
 server.on('error', onError);

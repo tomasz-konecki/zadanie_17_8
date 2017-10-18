@@ -13,7 +13,6 @@ const express = require('express'),
     user = require('./routes/user'),
     app = express(),
 
-    // This will configure Passport to use Auth0
     strategy = new Auth0Strategy(
         {
             domain: process.env.AUTH0_DOMAIN,
@@ -30,6 +29,9 @@ const express = require('express'),
         }
     );
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 passport.use(strategy);
 
 // you can use this section to keep a smaller payload
@@ -40,11 +42,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
     done(null, user);
 });
-
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
