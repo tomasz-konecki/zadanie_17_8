@@ -3,18 +3,18 @@ const bodyParser = require('body-parser'),
     csurf = require('csurf'),
     express = require('express'),
     extend = require('xtend'),
-    forms = require('forms');
+    forms = require('forms'),
 
-const profileForm = forms.create({
-    givenName: forms.fields.string({ required: true }),
-    surname: forms.fields.string({ required: true }),
-    streetAddress: forms.fields.string(),
-    city: forms.fields.string(),
-    state: forms.fields.string(),
-    zip: forms.fields.string()
-});
+    profileForm = forms.create({
+        givenName: forms.fields.string({ required: true }),
+        surname: forms.fields.string({ required: true }),
+        streetAddress: forms.fields.string(),
+        city: forms.fields.string(),
+        state: forms.fields.string(),
+        zip: forms.fields.string()
+    });
 
-function renderForm(req, res, locals) {
+renderForm(req, res, locals) {
     res.render('profile', extend({
         title: 'My Profile',
         csrfToken: req.csrfToken(),
@@ -27,7 +27,7 @@ function renderForm(req, res, locals) {
     }, locals || {}));
 }
 
-module.exports = function profile() {
+module.exports = profile() {
     const router = express.Router();
     router.use(cookieParser());
     router.use(bodyParser.urlencoded({ extended: true }));
@@ -35,9 +35,9 @@ module.exports = function profile() {
     return router;
 };
 
-router.all('/', function(req, res) {
+router.all('/', (req, res) => {
     profileForm.handle(req, {
-        success: function(form) {
+        success: (form) => {
             req.user.givenName = form.data.givenName;
             req.user.surname = form.data.surname;
             req.user.customData.streetAddress = form.data.streetAddress;
@@ -45,7 +45,7 @@ router.all('/', function(req, res) {
             req.user.customData.state = form.data.state;
             req.user.customData.zip = form.data.zip;
             req.user.customData.save();
-            req.user.save(function(err) {
+            req.user.save((err) => {
                 if (err) {
                     if (err.developerMessage){
                         console.error(err);
@@ -63,7 +63,7 @@ router.all('/', function(req, res) {
                 }
             });
         },
-        empty: function() {
+        empty: () => {
             renderForm(req, res);
         }
     });

@@ -1,5 +1,6 @@
 const express = require('express'),
   passport = require('passport'),
+  dotenv = require('dotenv').load(),
   router = express.Router();
 
 const env = {
@@ -14,12 +15,13 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
+
 router.get('/login', passport.authenticate('auth0', {
-  clientID: env.AUTH0_CLIENT_ID,
-  domain: env.AUTH0_DOMAIN,
-  redirectUri: env.AUTH0_CALLBACK_URL,
+  clientID: process.env.AUTH0_CLIENT_ID,
+  domain: process.env.AUTH0_DOMAIN,
+  redirectUri: process.env.AUTH0_CALLBACK_URL,
   responseType: 'code',
-  audience: 'https://' + env.AUTH0_DOMAIN + '/userinfo',
+  audience: 'https://' + process.env.AUTH0_DOMAIN + '/userinfo',
   scope: 'openid profile'}),
     (req, res) => {
     res.redirect("/");

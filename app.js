@@ -5,14 +5,12 @@ const express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
-    dotenv = require('dotenv'),
+    dotenv = require('dotenv').load(),
     passport = require('passport'),
     Auth0Strategy = require('passport-auth0'),
     flash = require('connect-flash'),
     routes = require('./routes/index'),
     user = require('./routes/user');
-
-dotenv.load();
 
 
 // This will configure Passport to use Auth0

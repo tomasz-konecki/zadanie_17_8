@@ -1,10 +1,10 @@
-const express = require('express');
-const passport = require('passport');
-const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
-const router = express.Router();
+const express = require('express'),
+    passport = require('passport'),
+    ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn(),
+    router = express.Router();
 
 /* GET user profile. */
-router.get('/', ensureLoggedIn, function(req, res, next) {
+router.get('/', ensureLoggedIn, (req, res, next) => {
   res.render('user', {
     user: req.user
   });
