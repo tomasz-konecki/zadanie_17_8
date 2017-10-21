@@ -59,8 +59,7 @@ router.post('/profile', ensureLoggedIn, (req, res, next) => {
         errors,
         saved: errors.length === 0
     })
-    console.log(errors.length === 0);
-    console.log(errors.join(', '));
+
 })
 
 module.exports = router;
