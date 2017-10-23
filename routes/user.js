@@ -18,32 +18,32 @@ router.post('/profile', ensureLoggedIn, (req, res, next) => {
     const {firstName, surname, streetAddress, city, state, zip} = req.body;
     let errors = [];
 
-    if(!firstName && !firstName.trim()) {
+    if(!firstName || !firstName.trim()) {
         errors.push({
             error: 'First name is required'
         })
     }
-    if(!surname && !surname.trim()) {
+    if(!surname || !surname.trim()) {
         errors.push({
             error: 'Surname is required'
         })
     }
-    if(!streetAddress && !streetAddress.trim()) {
+    if(!streetAddress || !streetAddress.trim()) {
         errors.push({
             error: 'Street address is required'
         })
     }
-    if(!city && !city.trim()) {
+    if(!city || !city.trim()) {
         errors.push({
             error: 'City is required'
         })
     }
-    if(!state && !state.trim()) {
+    if(!state || !state.trim()) {
         errors.push({
             error: 'State name is required'
         })
     }
-    if(!zip && !zip.trim()) {
+    if(!zip || !zip.trim()) {
         errors.push({
             error: 'ZIP is required'
         })
