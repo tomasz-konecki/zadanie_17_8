@@ -13,8 +13,6 @@ const app = require('../app'),
 
 app.set('port', port);
 
-app.use('/profile', ensureLoggedIn, require('../profile/profile')());
-
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
