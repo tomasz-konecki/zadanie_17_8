@@ -1,19 +1,20 @@
-const express = require('express'),
-    path = require('path'),
-    favicon = require('serve-favicon'),
-    logger = require('morgan'),
-    cookieParser = require('cookie-parser'),
-    bodyParser = require('body-parser'),
-    session = require('express-session'),
-    dotenv = require('dotenv').load(),
-    passport = require('passport'),
-    Auth0Strategy = require('passport-auth0'),
-    flash = require('connect-flash'),
-    routes = require('./routes/index'),
-    user = require('./routes/user'),
-    app = express(),
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const dotenv = require('dotenv').load();
+const passport = require('passport');
+const Auth0Strategy = require('passport-auth0');
+const flash = require('connect-flash');
+const routes = require('./routes/index');
+const user = require('./routes/user');
+//const mongoose = require('mongoose');
+const app = express();
 
-    strategy = new Auth0Strategy(
+const strategy = new Auth0Strategy(
         {
             domain: process.env.AUTH0_DOMAIN,
             clientID: process.env.AUTH0_CLIENT_ID,
